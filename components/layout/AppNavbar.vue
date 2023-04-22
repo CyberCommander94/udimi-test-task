@@ -10,7 +10,7 @@
     </button>
     <div>
       <nuxt-link to="/" class="app-navbar__nav-item">Projects</nuxt-link>
-      <nuxt-link to="/login" class="app-navbar__nav-item">Logout</nuxt-link>
+      <button class="app-navbar__nav-item" @click="userLogout">Logout</button>
     </div>
   </div>
 </template>
@@ -23,6 +23,16 @@ export default {
     return {
       menuIcon,
     }
+  },
+  methods: {
+    async userLogout() {
+      try {
+        await this.$auth.logout('local')
+        this.$auth.setUser({})
+      } catch (err) {
+        console.log(err)
+      }
+    },
   },
 }
 </script>

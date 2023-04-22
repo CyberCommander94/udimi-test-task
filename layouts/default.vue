@@ -31,6 +31,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    padding-top: 62px;
 
     &__content-wrapper {
       width: 100%;
