@@ -1,6 +1,8 @@
 const API_URL = 'https://api.quwi.com/v2/'
 
 export default {
+  mode: 'universal',
+  target: 'server',
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: true,
 

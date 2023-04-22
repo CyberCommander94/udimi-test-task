@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <AppNavbar />
     <div class="app__content-wrapper">
       <nuxt />
@@ -24,17 +24,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  #app {
+  .app {
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 62px;
-
     &__content-wrapper {
       width: 100%;
+      height: 100%;
+      padding-top: 62px;
+      box-sizing: border-box;
     }
   }
 </style>
