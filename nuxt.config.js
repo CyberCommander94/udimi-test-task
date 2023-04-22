@@ -56,8 +56,8 @@ export default {
         token: {
           property: 'token',
           global: true,
-          // required: true,
-          // type: 'Bearer'
+          required: true,
+          type: 'Bearer',
         },
         user: {
           property: 'user',
@@ -69,6 +69,9 @@ export default {
           user: false,
         },
       },
+    },
+    redirect: {
+      logout: '/login',
     },
   },
 
