@@ -3,10 +3,20 @@
     <form class="login-form" @submit.prevent="userLogin">
       <p class="login-logo">Quwi</p>
       <div class="login-form__row">
-        <input v-model="login.email" placeholder="email" type="text" class="login-form__input" />
+        <input
+          v-model="login.email"
+          placeholder="email"
+          type="text"
+          class="login-form__input"
+        />
       </div>
       <div class="login-form__row">
-        <input v-model="login.password" placeholder="password" type="password" class="login-form__input" />
+        <input
+          v-model="login.password"
+          placeholder="password"
+          type="password"
+          class="login-form__input"
+        />
       </div>
       <div class="login-form__row">
         <button type="submit" class="login-form__submit-btn">Login</button>
@@ -49,6 +59,8 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: url('@/assets/images/login-bg.jpg') no-repeat center center;
+  background-size: cover contain;
 }
 
 .login-logo {
@@ -65,7 +77,7 @@ export default {
 .login-form {
   width: 100%;
   max-width: 400px;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, .95);
   border-radius: 15px;
   padding: 20px 0;
   display: flex;
@@ -81,24 +93,23 @@ export default {
     box-sizing: border-box;
   }
 
-
   &__input {
     width: 100%;
     height: 40px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    padding: 0 15px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 15px 0 5px;
     box-sizing: border-box;
     color: #343536;
-    background-color: transparent;
+    background-color: transparent !important;
 
     &::placeholder {
-      color: #bbbbbb;
+      color: #777777;
     }
 
     &:focus {
       outline: 2px solid #da8848;
-      border: 1px solid transparent;
+      border-bottom: 1px solid transparent;
     }
   }
 

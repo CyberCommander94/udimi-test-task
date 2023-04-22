@@ -9,14 +9,16 @@
       />
     </button>
     <div>
-      <nuxt-link v-if="loggedIn" to="/" class="app-navbar__nav-item">Projects</nuxt-link>
-      <button class="app-navbar__nav-item" @click="userLogout">{{ loginButtonText }}</button>
+      <nuxt-link v-if="loggedIn" to="/" class="app-navbar__nav-item"
+        >Projects</nuxt-link
+      >
+      <button class="logout-btn" @click="userLogout">Logout</button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
 import menuIcon from '@/assets/images/menu-burger.png'
 
@@ -28,11 +30,8 @@ export default {
   },
   computed: {
     ...mapState({
-      loggedIn: state => state.auth.loggedIn
+      loggedIn: (state) => state.auth.loggedIn,
     }),
-    loginButtonText() {
-      return this.loggedIn ? 'Logout' : 'Login'
-    }
   },
   methods: {
     async userLogout() {
@@ -86,13 +85,23 @@ export default {
     border: none;
     background-color: transparent;
     outline: none;
-
-    &:not(:last-child) {
-      margin-right: 20px;
-    }
+    margin-right: 20px;
 
     &:hover {
       color: #c44512;
+    }
+  }
+
+  .logout-btn {
+    color: #ffffff;
+    padding: 8px 20px;
+    color: #ffffff;
+    background-color: #c44512;
+    border: none;
+    border-radius: 5px;
+
+    &:focus {
+      outline: 2px solid #da8848;
     }
   }
 }
