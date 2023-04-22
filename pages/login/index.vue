@@ -89,7 +89,8 @@ export default {
     border-radius: 5px;
     padding: 0 15px;
     box-sizing: border-box;
-    color: #2a3365;
+    color: #343536;
+    background-color: transparent;
 
     &::placeholder {
       color: #bbbbbb;
