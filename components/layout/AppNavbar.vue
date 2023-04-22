@@ -12,7 +12,7 @@
       <nuxt-link v-if="loggedIn" to="/" class="app-navbar__nav-item"
         >Projects</nuxt-link
       >
-      <button class="logout-btn" @click="userLogout">Logout</button>
+      <button v-if="loggedIn" class="logout-btn" @click="userLogout">Logout</button>
     </div>
   </div>
 </template>
