@@ -2,7 +2,7 @@
   <div class="home-page">
     <div class="home-page__content-wrapper">
       <AppProjectCard
-        v-for="item in projectsData"
+        v-for="item in projects"
         :key="item.id"
         class="home-page__card"
         :project="item"
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 import AppProjectCard from '@/components/layout/AppProjectCard.vue'
 
 export default {
@@ -19,23 +21,20 @@ export default {
     AppProjectCard,
   },
   data() {
-    return {
-      projectsData: [],
-    }
+    return {}
+  },
+  computed: {
+    ...mapState({
+      projects: (state) => state.projects.projects,
+    }),
   },
   mounted() {
-    this.fetchProjectsData()
+    this.getProjectsList()
   },
   methods: {
-    async fetchProjectsData() {
-      const response = await this.$axios.$get('projects-manage/index', {
-        headers: {
-          'Content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7B7Ty2qQDVmn7Sc1',
-          Authorization: `${localStorage.getItem('auth._token.local')}`,
-        },
-      })
-      this.projectsData = response.projects
-    },
+    ...mapActions({
+      getProjectsList: 'projects/getProjectsList',
+    }),
   },
 }
 </script>

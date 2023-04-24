@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 import AppNavbar from '@/components/layout/AppNavbar'
 import AppEditProjectDialog from '@/components/layout/AppEditProjectDialog'
@@ -25,35 +25,34 @@ export default {
     AppNavbar,
     AppEditProjectDialog,
   },
+
   data() {
     return {}
   },
+
   computed: {
     ...mapState({
       isEditProjectDialogOpened: (state) =>
         state.dialogs.isEditProjectDialogOpened,
-      currentProject: (state) => state.project.currentProject,
+      currentProject: (state) => state.projects.currentProject,
     }),
   },
+
   methods: {
     ...mapMutations({
       setEditProjectDialogState: 'dialogs/setEditProjectDialogState',
-      setCurrentProject: 'project/setCurrentProject',
+      setCurrentProject: 'projects/setCurrentProject',
     }),
-    async handleEditProjectSubmit(payload) {
-      const formData = new FormData();
-      formData.append("name", payload.name);
-      const response = await this.$axios.$post(
-        `projects-manage/update?id=${this.currentProject.id}`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `${localStorage.getItem('auth._token.local')}`,
-          },
-        }
-      )
+    ...mapActions({
+      getProjectsList: 'projects/getProjectsList',
+      handleEditProject: 'projects/handleEditProject',
+    }),
+    handleEditProjectSubmit(payload) {
+      const formData = new FormData()
+      formData.append('name', payload.name)
+      this.handleEditProject(formData)
       this.closeEditProjectDialog()
+      this.getProjectsList()
     },
     closeEditProjectDialog() {
       this.setEditProjectDialogState(false)
@@ -71,6 +70,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+
   &__content-wrapper {
     width: 100%;
     height: 100%;

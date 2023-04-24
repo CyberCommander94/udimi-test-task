@@ -41,6 +41,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    'cookie-universal-nuxt',
   ],
 
   router: {

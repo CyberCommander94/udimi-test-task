@@ -1,8 +1,10 @@
 <template>
   <div class="project-card" @click="startEditing">
     <img class="project-card__image" :src="getProjectImg" alt="" />
-    <h2 class="project-card__name">{{ project?.name }}</h2>
-    <p class="project-card__status" :class="{'active': project?.is_active}">{{ project?.is_active ? 'Active' : 'Unactive' }}</p>
+    <h2 class="project-card__name">{{ project.name }}</h2>
+    <p class="project-card__status" :class="{ active: project.is_active }">
+      {{ getStatus }}
+    </p>
   </div>
 </template>
 
@@ -15,24 +17,29 @@ export default {
   props: {
     project: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   computed: {
     getProjectImg() {
-      return this.project?.logo_url ? this.project?.logo_url : defaultProjectIcon;
+      return this.project?.logo_url
+        ? this.project?.logo_url
+        : defaultProjectIcon
+    },
+    getStatus() {
+      return this.project.is_active ? 'Active' : 'Unactive'
     },
   },
   methods: {
     ...mapMutations({
       setEditProjectDialogState: 'dialogs/setEditProjectDialogState',
-      setCurrentProject: 'project/setCurrentProject'
+      setCurrentProject: 'projects/setCurrentProject',
     }),
     startEditing() {
-      this.setEditProjectDialogState(true);
-      this.setCurrentProject(this.project);
-    }
-  }
+      this.setEditProjectDialogState(true)
+      this.setCurrentProject(this.project)
+    },
+  },
 }
 </script>
 
