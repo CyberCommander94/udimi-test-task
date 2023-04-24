@@ -41,7 +41,6 @@ export default {
         const response = await this.$auth.loginWith('local', {
           data: this.login,
         })
-        console.log(response)
         this.$auth.setUser(response.data.app_init.user)
       } catch (err) {
         console.log(err)
@@ -77,7 +76,7 @@ export default {
 .login-form {
   width: 100%;
   max-width: 400px;
-  background-color: rgba(255, 255, 255, .95);
+  background-color: rgba(255, 255, 255, 0.95);
   border-radius: 15px;
   padding: 20px 0;
   display: flex;
