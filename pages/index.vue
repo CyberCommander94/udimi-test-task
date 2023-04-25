@@ -8,54 +8,6 @@
           class="home-page__card"
           :project="item"
         ></AppProjectCard>
-        <AppProjectCard
-          v-for="item in projects"
-          :key="item.id"
-          class="home-page__card"
-          :project="item"
-        ></AppProjectCard>
-        <AppProjectCard
-          v-for="item in projects"
-          :key="item.id"
-          class="home-page__card"
-          :project="item"
-        ></AppProjectCard>
-        <AppProjectCard
-          v-for="item in projects"
-          :key="item.id"
-          class="home-page__card"
-          :project="item"
-        ></AppProjectCard>
-        <AppProjectCard
-          v-for="item in projects"
-          :key="item.id"
-          class="home-page__card"
-          :project="item"
-        ></AppProjectCard>
-        <AppProjectCard
-          v-for="item in projects"
-          :key="item.id"
-          class="home-page__card"
-          :project="item"
-        ></AppProjectCard>
-        <AppProjectCard
-          v-for="item in projects"
-          :key="item.id"
-          class="home-page__card"
-          :project="item"
-        ></AppProjectCard>
-        <AppProjectCard
-          v-for="item in projects"
-          :key="item.id"
-          class="home-page__card"
-          :project="item"
-        ></AppProjectCard>
-        <AppProjectCard
-          v-for="item in projects"
-          :key="item.id"
-          class="home-page__card"
-          :project="item"
-        ></AppProjectCard>
       </div>
     </div>
   </div>
