@@ -3,13 +3,19 @@
     <div class="app-navbar__logo">Quwi</div>
     <button class="app-navbar__mobile-menu-button">
       <img
-        :src="menuIcon"
+        :src="getMobileMenuIcon"
         alt=""
         class="app-navbar__mobile-menu-button__icon"
+        :class="{ 'menu-opened': isMobileMenuOpened }"
+        @click="toggleMobileMenu"
       />
     </button>
-    <div>
-      <div>
+    <div
+      class="app-navbar__nav-wrapper"
+      :class="{ opened: isMobileMenuOpened }"
+      @click.self="toggleMobileMenu"
+    >
+      <div class="app-navbar__nav-wrapper__inner">
         <nuxt-link v-if="loggedIn" to="/" class="app-navbar__nav-item"
           >Projects</nuxt-link
         >
@@ -25,19 +31,28 @@
 import { mapState } from 'vuex'
 
 import menuIcon from '@/assets/images/menu-burger.png'
+import menuIconClose from '@/assets/images/close.png'
 
 export default {
   data() {
     return {
       menuIcon,
+      menuIconClose,
+      isMobileMenuOpened: false,
     }
   },
   computed: {
     ...mapState({
       loggedIn: (state) => state.auth.loggedIn,
     }),
+    getMobileMenuIcon() {
+      return this.isMobileMenuOpened ? menuIconClose : menuIcon
+    },
   },
   methods: {
+    toggleMobileMenu() {
+      this.isMobileMenuOpened = !this.isMobileMenuOpened
+    },
     async userLogout() {
       try {
         await this.$auth.logout('local')
@@ -69,6 +84,8 @@ export default {
     font-size: 28px;
     font-weight: bold;
     color: #2a3365;
+    position: relative;
+    z-index: 5001;
   }
 
   &__mobile-menu-button {
@@ -77,6 +94,9 @@ export default {
     background: none;
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 5001;
+
     &.hide {
       visibility: hidden;
     }
@@ -84,17 +104,62 @@ export default {
     &__icon {
       width: 25px;
       height: 25px;
+      &.menu-opened {
+        -webkit-filter: invert(100%); /* Safari/Chrome */
+        filter: invert(100%);
+      }
+    }
+  }
+
+  &__nav-wrapper {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5000;
+    width: 0;
+    background: transparent;
+    transition: background 0.2s ease-out, width 0s 0.2s;
+    overflow: hidden;
+
+    &__inner {
+      width: 70vw;
+      height: 100%;
+      background-color: #ffffff;
+      padding: 62px 20px 20px 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      transform: translate(-100%);
+      transition: transform 0.2s ease-out;
+    }
+    &.opened {
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.6);
+      transition: background 0.2s ease-in;
+
+      .app-navbar__nav-wrapper__inner {
+        transform: translate(0);
+        transition: transform 0.2s ease-in;
+      }
     }
   }
 
   &__nav-item {
     color: #2a3365;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     border: none;
     background-color: transparent;
     outline: none;
-    margin-right: 20px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 15px 0;
+    margin-bottom: 5px;
 
     &:hover {
       color: #c44512;
@@ -108,6 +173,10 @@ export default {
     background-color: #c44512;
     border: none;
     border-radius: 5px;
+    font-family: Montserrat;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
 
     &:focus {
       outline: 2px solid #da8848;
@@ -118,10 +187,60 @@ export default {
 @include bp($lg, min) {
   .app-navbar {
     padding: 10px 30px;
-  }
 
-  &__mobile-menu-button {
-    display: none;
+    &__mobile-menu-button {
+      display: none;
+    }
+
+    &__nav-wrapper {
+      height: auto;
+      position: relative;
+      z-index: inherit;
+      width: auto;
+      background: transparent;
+      transition: none;
+      overflow: visible;
+
+      &__inner {
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        padding: 0;
+        box-sizing: border-box;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        transform: none;
+        transition: none;
+      }
+      &.opened {
+        width: auto;
+        background: transparent;
+        transition: none;
+
+        .app-navbar__nav-wrapper__inner {
+          transform: none;
+          transition: none;
+        }
+      }
+    }
+
+    &__nav-item {
+      width: auto;
+      text-align: center;
+      border-bottom: none;
+      padding: 8px 20px;
+      margin-right: 10px;
+      margin-bottom: 0;
+
+      &:hover {
+        color: #c44512;
+      }
+    }
+
+    .logout-btn {
+      margin-top: 0;
+    }
   }
 }
 </style>

@@ -3,10 +3,14 @@
     <form class="edit-project-dialog__form">
       <div class="edit-project-dialog__form-header">
         <p>Edit project</p>
-        <img :src="closeIcon" @click="closeDialog" class="edit-project-dialog__close-btn" />
+        <img
+          :src="closeIcon"
+          class="edit-project-dialog__close-btn"
+          @click="closeDialog"
+        />
       </div>
       <div class="edit-project-dialog__row">
-        <p class="edit-project-dialog__input-text">Project name:</p>
+        <pre class="edit-project-dialog__input-text">Project name:</pre>
         <input
           v-model="projectName"
           placeholder="Project name"
@@ -17,8 +21,8 @@
       <div class="edit-project-dialog__row">
         <button
           type="submit"
-          @click.prevent="handleSubmit"
           class="edit-project-dialog__submit-btn"
+          @click.prevent="handleSubmit"
         >
           Submit
         </button>
@@ -46,10 +50,10 @@ export default {
 
   methods: {
     closeDialog() {
-      this.$emit('closeDialog');
+      this.$emit('closeDialog')
     },
     handleSubmit() {
-      this.$emit('handleSubmit', { name: this.projectName });
+      this.$emit('handleSubmit', { name: this.projectName })
     },
   },
 }
@@ -68,17 +72,17 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 12px;
 
   &__close-btn {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
   }
 
   &__form {
     width: 100%;
-    max-width: 600px;
     background-color: #ffffff;
-    border-radius: 5px;
+    border-radius: 0;
     padding: 15px 0;
     box-sizing: border-box;
   }
@@ -86,7 +90,7 @@ export default {
   &__form-header {
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 0 30px 15px 30px;
+    padding: 0 15px 15px 15px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -96,30 +100,35 @@ export default {
 
   &__row {
     width: 100%;
-    padding: 0 30px 15px 30px;
+    padding: 0 15px 15px 15px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   &__input-text {
     margin-right: 10px;
-    width: 35%;
+    width: max-content;
+    font-size: 12px;
+    font-family: Montserrat;
   }
 
   &__input {
     width: 100%;
     height: 40px;
+    font-family: Montserrat;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding: 0 15px 0 5px;
     box-sizing: border-box;
     color: #343536;
     background-color: transparent !important;
+    font-size: 12px;
 
     &::placeholder {
       color: #777777;
+      font-family: Montserrat;
     }
 
     &:focus {
@@ -136,9 +145,44 @@ export default {
     border: none;
     border-radius: 5px;
     margin-top: 20px;
+    font-size: 12px;
+    font-family: Montserrat;
+    cursor: pointer;
 
     &:focus {
       outline: 2px solid #da8848;
+    }
+  }
+}
+
+@include bp($sm, min) {
+  .edit-project-dialog {
+    &__form {
+      max-width: 500px;
+      border-radius: 5px;
+    }
+
+    &__form-header {
+      padding: 0 30px 15px 30px;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    &__row {
+      padding: 0 30px 15px 30px;
+    }
+
+    &__input-text {
+      width: 35%;
+      font-size: 14px;
+    }
+
+    &__input {
+      font-size: 14px;
+    }
+
+    &__submit-btn {
+      font-size: 14px;
     }
   }
 }

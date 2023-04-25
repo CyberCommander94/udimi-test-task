@@ -52,6 +52,7 @@ export default {
   display: flex;
   align-items: center;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 
   &__image {
     width: 45px;
