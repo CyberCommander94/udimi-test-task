@@ -1,4 +1,12 @@
+import * as path from 'path';
 const API_URL = 'https://api.quwi.com/v2/'
+
+const loader = {
+  loader: "sass-resources-loader",
+  options: {
+    resources: path.resolve(__dirname, "./assets/styles/main.scss"),
+  },
+};
 
 export default {
   mode: 'universal',
@@ -79,5 +87,12 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    extend(config) {
+      config.module.rules.push({
+        test: /\.scss$/,
+        use: ["sass-loader", loader],
+      })
+    }
+  },
 }

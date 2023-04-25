@@ -1,7 +1,7 @@
 <template>
   <div class="app-navbar">
     <div class="app-navbar__logo">Quwi</div>
-    <button class="app-navbar__mobile-menu-button disabled">
+    <button class="app-navbar__mobile-menu-button">
       <img
         :src="menuIcon"
         alt=""
@@ -9,12 +9,14 @@
       />
     </button>
     <div>
-      <nuxt-link v-if="loggedIn" to="/" class="app-navbar__nav-item"
-        >Projects</nuxt-link
-      >
-      <button v-if="loggedIn" class="logout-btn" @click="userLogout">
-        Logout
-      </button>
+      <div>
+        <nuxt-link v-if="loggedIn" to="/" class="app-navbar__nav-item"
+          >Projects</nuxt-link
+        >
+        <button v-if="loggedIn" class="logout-btn" @click="userLogout">
+          Logout
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -70,8 +72,13 @@ export default {
   }
 
   &__mobile-menu-button {
-    &.disabled {
-      display: none;
+    display: block;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    &.hide {
+      visibility: hidden;
     }
 
     &__icon {
@@ -105,6 +112,16 @@ export default {
     &:focus {
       outline: 2px solid #da8848;
     }
+  }
+}
+
+@include bp($lg, min) {
+  .app-navbar {
+    padding: 10px 30px;
+  }
+
+  &__mobile-menu-button {
+    display: none;
   }
 }
 </style>

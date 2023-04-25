@@ -75,10 +75,9 @@ export default {
 
 .login-form {
   width: 100%;
-  max-width: 400px;
   background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  padding: 20px 0;
+  border-radius: 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -88,7 +87,7 @@ export default {
 
   &__row {
     width: 100%;
-    padding: 0 30px 15px 30px;
+    padding: 0 20px 15px 20px;
     box-sizing: border-box;
   }
 
@@ -123,6 +122,18 @@ export default {
 
     &:focus {
       outline: 2px solid #da8848;
+    }
+  }
+}
+
+@include bp($sm, min) {
+  .login-form {
+    border-radius: 15px;
+    padding: 24px 0;
+    max-width: 500px;
+
+    &__row {
+      padding: 0 30px 15px 30px;
     }
   }
 }

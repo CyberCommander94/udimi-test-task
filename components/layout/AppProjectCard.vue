@@ -45,7 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 .project-card {
-  padding: 20px 40px;
+  padding: 10px 10px;
   background-color: #ffffff;
   border-radius: 5px;
   box-sizing: border-box;
@@ -54,21 +54,77 @@ export default {
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
 
   &__image {
-    width: 100px;
-    height: 100px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    margin-right: 60px;
+    margin-right: 20px;
   }
 
   &__name {
-    margin-right: 60px;
+    margin-right: 20px;
+    font-size: 12px;
   }
 
   &__status {
-    font-weight: 700;
     color: red;
+    font-size: 12px;
+
     &.active {
       color: green;
+    }
+  }
+}
+
+@include bp($sm, min) {
+  .project-card {
+    padding: 15px 15px;
+
+    &__image {
+      width: 60px;
+      height: 60px;
+      margin-right: 40px;
+    }
+
+    &__name {
+      margin-right: 40px;
+      font-size: 14px;
+    }
+
+    &__status {
+      font-size: 14px;
+    }
+  }
+}
+
+@include bp($md, min) {
+  .project-card {
+    padding: 20px 20px;
+
+    &__image {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin-right: 60px;
+    }
+
+    &__name {
+      margin-right: 60px;
+      font-size: 16px;
+    }
+
+    &__status {
+      font-size: 16px;
+    }
+  }
+}
+
+@include bp($lg, min) {
+  .project-card {
+    padding: 20px 20px;
+
+    &__image {
+      width: 90px;
+      height: 90px;
     }
   }
 }
