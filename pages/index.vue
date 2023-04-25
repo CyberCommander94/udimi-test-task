@@ -83,7 +83,7 @@ export default {
 
     &__inner {
       width: 100%;
-      padding: 0 20px 0 20px;
+      padding: 0 18px 0 14px;
       margin-right: -16px;
       box-sizing: border-box;
     }
