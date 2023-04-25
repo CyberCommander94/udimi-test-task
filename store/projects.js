@@ -27,15 +27,19 @@ export const actions = {
   },
 
   async handleEditProject({ payload }) {
-    await this.$axios.$post(
-      `projects-manage/update?id=${this.currentProject.id}`,
-      payload,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: getAuthToken(this),
-        },
-      }
-    )
+    try {
+      await this.$axios.$post(
+        `projects-manage/update?id=${this.currentProject.id}`,
+        payload,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: getAuthToken(this),
+          },
+        }
+      )
+    } catch {
+      console.error("Error with code 404 - needed resource for update wasn't found");
+    }
   },
 }
