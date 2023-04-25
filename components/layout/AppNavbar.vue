@@ -1,7 +1,7 @@
 <template>
   <div class="app-navbar">
     <div class="app-navbar__logo">Quwi</div>
-    <button class="app-navbar__mobile-menu-button">
+    <button v-if="loggedIn" class="app-navbar__mobile-menu-button">
       <img
         :src="getMobileMenuIcon"
         alt=""
@@ -54,6 +54,7 @@ export default {
       this.isMobileMenuOpened = !this.isMobileMenuOpened
     },
     async userLogout() {
+      this.isMobileMenuOpened = false;
       try {
         await this.$auth.logout('local')
         this.$auth.setUser({})
