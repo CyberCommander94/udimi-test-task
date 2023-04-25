@@ -77,6 +77,7 @@ export default {
   width: 100vw;
   height: auto;
   position: fixed;
+  z-index: 6000;
   top: 0;
   left: 0;
   display: flex;
@@ -256,6 +257,10 @@ export default {
 
       &:hover {
         color: #c44512;
+      }
+
+      &:first-child {
+        border-top: none;
       }
     }
 

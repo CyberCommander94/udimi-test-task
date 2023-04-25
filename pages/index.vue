@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
-    <div class="home-page__content-wrapper">
-      <div class="home-page__content-wrapper__inner">
+    <div class="home-page__content-wrapper ">
+      <div v-if="projects && projects.length" class="home-page__content-wrapper__inner">
         <AppProjectCard
           v-for="item in projects"
           :key="item.id"
@@ -9,6 +9,7 @@
           :project="item"
         ></AppProjectCard>
       </div>
+      <p v-else>You don't have any projects yet</p>
     </div>
   </div>
 </template>
@@ -51,6 +52,7 @@ export default {
   &__content-wrapper {
     margin-top: 20px;
     margin-right: 10px;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;

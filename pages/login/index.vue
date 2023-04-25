@@ -2,6 +2,12 @@
   <div class="login-form-wrapper">
     <form class="login-form" @submit.prevent="userLogin">
       <p class="login-logo">Quwi</p>
+      <div class="login-form__row warning">
+        <p class="login-form__warning-text">
+          Incorrect email or password. Please check your credentials and try
+          again.
+        </p>
+      </div>
       <div class="login-form__row">
         <input
           v-model="login.email"
@@ -85,10 +91,21 @@ export default {
   box-sizing: border-box;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
+  &__warning-text {
+    font-size: 8px;
+    color: #c44512;
+    line-height: 12px;
+    font-family: Montserrat;
+  }
+
   &__row {
     width: 100%;
     padding: 0 20px 15px 20px;
     box-sizing: border-box;
+
+    &.warning {
+      padding-bottom: 5px;
+    }
   }
 
   &__input {
@@ -100,6 +117,7 @@ export default {
     box-sizing: border-box;
     color: #343536;
     background-color: transparent !important;
+    font-family: Montserrat;
 
     &::placeholder {
       color: #777777;
@@ -119,6 +137,7 @@ export default {
     border: none;
     border-radius: 5px;
     margin-top: 20px;
+    font-family: Montserrat;
 
     &:focus {
       outline: 2px solid #da8848;
