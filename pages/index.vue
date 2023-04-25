@@ -25,13 +25,13 @@ export default {
   data() {
     return {}
   },
+  async fetch() {
+    await this.getProjectsList()
+  },
   computed: {
     ...mapState({
       projects: (state) => state.projects.projects,
     }),
-  },
-  mounted() {
-    this.getProjectsList()
   },
   methods: {
     ...mapActions({

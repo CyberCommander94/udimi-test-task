@@ -16,9 +16,15 @@
       @click.self="toggleMobileMenu"
     >
       <div class="app-navbar__nav-wrapper__inner">
-        <nuxt-link v-if="loggedIn" to="/" class="app-navbar__nav-item"
-          >Projects</nuxt-link
-        >
+        <div class="app-navbar__nav-item-wrapper" @click="toggleMobileMenu">
+          <nuxt-link
+            v-if="loggedIn"
+            to="/"
+            class="app-navbar__nav-item"
+            @click="toggleMobileMenu"
+            >Projects</nuxt-link
+          >
+        </div>
         <button v-if="loggedIn" class="logout-btn" @click="userLogout">
           Logout
         </button>
@@ -54,7 +60,7 @@ export default {
       this.isMobileMenuOpened = !this.isMobileMenuOpened
     },
     async userLogout() {
-      this.isMobileMenuOpened = false;
+      this.isMobileMenuOpened = false
       try {
         await this.$auth.logout('local')
         this.$auth.setUser({})
@@ -148,7 +154,13 @@ export default {
     }
   }
 
+  &__nav-item-wrapper {
+    width: 100%;
+    height: auto;
+  }
+
   &__nav-item {
+    display: block;
     color: #2a3365;
     text-decoration: none;
     font-size: 16px;
@@ -164,6 +176,9 @@ export default {
 
     &:hover {
       color: #c44512;
+    }
+    &:first-child {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
     }
   }
 
@@ -224,6 +239,11 @@ export default {
           transition: none;
         }
       }
+    }
+
+    &__nav-item-wrapper {
+      width: auto;
+      height: auto;
     }
 
     &__nav-item {

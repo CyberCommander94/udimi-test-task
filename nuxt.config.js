@@ -11,6 +11,7 @@ const loader = {
 export default {
   mode: 'universal',
   target: 'server',
+  fallback: true,
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: true,
 
