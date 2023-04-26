@@ -1,0 +1,1 @@
+window.__NUXT__=(function(a){return {staticAssetsBase:"udimi-test-task\u002F_nuxt\u002Fstatic\u002F1682544641",layout:"default",error:a,state:a,serverRendered:false,routePath:"\u002F",config:{_app:{basePath:"udimi-test-task\u002F",assetsPath:"udimi-test-task\u002F_nuxt\u002F",cdnURL:a}}}}(null));
