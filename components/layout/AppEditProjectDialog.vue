@@ -9,6 +9,11 @@
           @click="closeDialog"
         />
       </div>
+      <div class="edit-project-dialog__row warning">
+        <p v-if="isEditingFailed" class="edit-project-dialog__warning-text">
+          Invalid payload data. Please check request payload with API endpoint payload requirements.
+        </p>
+      </div>
       <div class="edit-project-dialog__row">
         <pre class="edit-project-dialog__input-text">Project name:</pre>
         <input
@@ -32,6 +37,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import closeIcon from '@/assets/images/close.png'
 
 export default {
@@ -46,6 +52,12 @@ export default {
       closeIcon,
       projectName: this.projectData.name,
     }
+  },
+
+  computed: {
+    ...mapState({
+      isEditingFailed: (state) => state.projects.isEditingFailed,
+    }),
   },
 
   methods: {
@@ -105,6 +117,17 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+
+    &.warning {
+      padding-bottom: 5px;
+    }
+  }
+
+  &__warning-text {
+    font-size: 8px;
+    color: #c44512;
+    line-height: 12px;
+    font-family: Montserrat;
   }
 
   &__input-text {

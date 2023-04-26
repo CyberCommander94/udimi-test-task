@@ -35,6 +35,7 @@ export default {
       isEditProjectDialogOpened: (state) =>
         state.dialogs.isEditProjectDialogOpened,
       currentProject: (state) => state.projects.currentProject,
+      isEditingFailed: (state) => state.projects.isEditingFailed,
     }),
   },
 
@@ -42,6 +43,7 @@ export default {
     ...mapMutations({
       setEditProjectDialogState: 'dialogs/setEditProjectDialogState',
       setCurrentProject: 'projects/setCurrentProject',
+      setEditingStatus: 'projects/setEditingStatus',
     }),
     ...mapActions({
       getProjectsList: 'projects/getProjectsList',
@@ -51,12 +53,15 @@ export default {
       const formData = new FormData()
       formData.append('name', payload.name)
       this.handleEditProject(formData)
-      this.closeEditProjectDialog()
-      this.getProjectsList()
+      if (!this.isEditingFailed) {
+        this.closeEditProjectDialog()
+        this.getProjectsList()
+      }
     },
     closeEditProjectDialog() {
       this.setEditProjectDialogState(false)
       this.setCurrentProject(null)
+      this.setEditingStatus(false)
     },
   },
 }

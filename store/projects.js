@@ -3,6 +3,7 @@ import { getAuthToken } from '@/services/utils'
 export const state = () => ({
   projects: [],
   currentProject: null,
+  isEditingFailed: false,
 })
 
 export const mutations = {
@@ -12,6 +13,9 @@ export const mutations = {
   setCurrentProject(state, payload) {
     state.currentProject = payload
   },
+  setEditingStatus(state, payload) {
+    state.isEditingFailed = payload
+  },
 }
 
 export const actions = {
@@ -19,17 +23,17 @@ export const actions = {
     const response = await this.$axios.$get('projects-manage/index', {
       headers: {
         'Content-type':
-          'multipart/form-data; boundary=----WebKitFormBoundary7B7Ty2qQDVmn7Sc1',
+          'multipart/form-data',
         Authorization: getAuthToken(this),
       },
     })
     commit('setProjectslist', response.projects)
   },
 
-  async handleEditProject({ payload }) {
+  async handleEditProject({ commit, state }, payload) {
     try {
       await this.$axios.$post(
-        `projects-manage/update?id=${this.currentProject.id}`,
+        `projects-manage/update?id=${state.currentProject.id}`,
         payload,
         {
           headers: {
@@ -48,6 +52,7 @@ export const actions = {
         console.error(
           'Error with code 417 - validation error. Please check request payload with API endpoint payload requirements'
         )
+        commit('setEditingStatus', true)
       }
     }
   },
