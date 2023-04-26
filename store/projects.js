@@ -38,8 +38,17 @@ export const actions = {
           },
         }
       )
-    } catch {
-      console.error("Error with code 404 - needed resource for update wasn't found");
+    } catch (err) {
+      if (err.response.status === 404) {
+        console.error(
+          "Error with code 404 - needed resource for update wasn't found"
+        )
+      }
+      if (err.response.status === 417) {
+        console.error(
+          'Error with code 417 - validation error. Please check request payload with API endpoint payload requirements'
+        )
+      }
     }
   },
 }

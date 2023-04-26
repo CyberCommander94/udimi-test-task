@@ -3,7 +3,7 @@
     <form class="login-form" @submit.prevent="userLogin">
       <p class="login-logo">Quwi</p>
       <div class="login-form__row warning">
-        <p class="login-form__warning-text">
+        <p v-if="isAuthFailed" class="login-form__warning-text">
           Incorrect email or password. Please check your credentials and try
           again.
         </p>
@@ -39,6 +39,7 @@ export default {
         email: '',
         password: '',
       },
+      isAuthFailed: false,
     }
   },
   methods: {
@@ -49,7 +50,9 @@ export default {
         })
         this.$auth.setUser(response.data.app_init.user)
       } catch (err) {
-        console.log(err)
+        if (err.response.status === 417) {
+          this.isAuthFailed = true
+        }
       }
     },
   },
