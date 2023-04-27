@@ -49,10 +49,10 @@ export default {
       getProjectsList: 'projects/getProjectsList',
       handleEditProject: 'projects/handleEditProject',
     }),
-    handleEditProjectSubmit(payload) {
+    async handleEditProjectSubmit(payload) {
       const formData = new FormData()
       formData.append('name', payload.name)
-      this.handleEditProject(formData)
+      await this.handleEditProject(formData)
       if (!this.isEditingFailed) {
         this.closeEditProjectDialog()
         this.getProjectsList()
